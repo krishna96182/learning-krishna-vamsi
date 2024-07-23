@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function log(num){
+            if(num > 5){
+                return;
+            }
+            console.log(num);
+            log(num + 1);
+        }
+        log(1);
+
+
+        function UntilFive(res = 0, counts = 0){
+            if(res === 5){
+                console.log(`The random result: ${res}`);
+                console.log(`How many times random is executed: ${counts}`);
+                return;
+            }
+            res = Math.floor(Math.random() * (10 - 1 + 1) + 1);
+            counts++;
+            UntilFive(res, counts);
+        }
+        UntilFive();
+
+        let result = 0;
+        let count = 0;
+        while (result !== 5) {
+            result = Math.floor(Math.random() * (10 - 1 + 1) + 1);
+            count++;
+        }
+        console.log(`The random result: ${result}`);
+        console.log(`How many times random is executed: ${count}`);
+
+
+        function randomUntilFive(results = 0, counts = 0){
+            if(results === 5){
+            console.log(`The random result: ${results}`);
+            console.log(`How many times random is executed: ${counts}`);
+            return;
+        }
+    }
+    randomUntilFive(5);
+
+
+    function randomUntilFive(result = 0, count = 0){
+        if(result === 5){
+            console.log(`The random result: ${result}`);
+            console.log(`How many times random is executed: ${count}`);
+            return;
+        }
+        result = Math.floor(Math.random() * (10 - 1 + 1) + 1);
+        count++;
+        randomUntilFive(result, count);
+    }
+    randomUntilFive(4);
+
+    function fact(num){
+        if(num === 1){
+            return num;
+        }
+        return num * fact(num-1)
+    }
+    console.log(fact(4));
+    console.log(fact(6));
+    </script>
+</body>
+</html>
