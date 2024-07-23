@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Vehicle {
+            displayType() {
+                console.log('Car');
+            }
+        }
+        let vehicle = new Vehicle();
+        vehicle.displayType();
+
+        class Vehicles {
+            constructor() {
+                console.log('Running Automatically')
+            }
+            displayType() {
+                console.log('Car');
+            }
+        }
+        let vehicles = new Vehicles();
+
+        class Vehicless{
+            constructor() {
+                console.log('Start me up');
+            }
+        }
+        class Tesla extends Vehicless {
+        }
+        let model2 = new Tesla();
+
+        class Vehicl {
+            constructor() {
+                console.log('The Base Vehicle.');
+            }
+        }
+        class Teslas extends Vehicle{
+            constructor() {
+                super();
+                console.log('The Tesla Vehicle.')
+            }
+        }
+        let model3 = new Teslas();
+
+        class Vehic {
+            getPropulsion() {
+                return 'Gas Powered';
+            }
+        }
+        class Tesl extends Vehic {
+            getPropulsion() {
+                return 'Electric Powered';
+            }
+        }
+
+        let model1 = new Tesl();
+        let poweredby = model1.getPropulsion();
+        console.log(poweredby);
+
+        class Cars {constructor() {
+            this.kindof = 'Car';
+        }
+    }
+
+    class Honda extends Cars {
+        constructor() {
+            super();
+        }
+    }
+
+    let car = new Honda();
+    console.log(car.kindof);
+
+    class Car {
+        static getDefaultEngine() {
+            return 'Gas';
+        }
+    }
+    let engine = Car.getDefaultEngine();
+    console.log(engine);
+
+    class Square {
+        constructor(width) {
+            this.width = width;
+        }
+
+        get height() {
+            return this.width;
+        }
+        set height(height) {
+            this.width = height;
+            console.log('Set a new height of: '+this.height)
+        }
+        get area() {
+            return this.width * this.height;
+        }
+    }
+
+    let square = new Square(4);
+    console.log('Getting the height: ' + square.height);
+    console.log('Getting the area: ' + square.area);
+
+    square.height = 8;
+    console.log('Getting the height: ' + square.height);
+    console.log('Getting the area: ' + square.area);
+
+    square.height = 10;
+    console.log('Getting the height: ' + square.height);
+    console.log('Getting the area: ' + square.area);
+
+    function move() {console.log('finished moving');
+
+    }
+    move(new class {
+        constructor() {
+            console.log('moving forward');
+        }
+    });
+    </script>
+</body>
+</html>
