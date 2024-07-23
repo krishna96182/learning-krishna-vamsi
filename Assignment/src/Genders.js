@@ -3,18 +3,6 @@ import axios from "axios";
 function Genders(){
     let [genderName, setgenderName] = useState("");
     let [displayName, setDisplayName] = useState("");
-    useEffect(function(){
-        console.log("function called on load");
-        getGender();
-        /* axios.get("todos")
-        .then(function (response){
-            console.log(response.data);
-            settodos(response.data);
-        })
-        .catch(function (error){
-            console.log(error);
-        }) */
-    },[]);
     function genderTodoEntered(e){
         setgenderName(e.target.value);
     }
@@ -33,7 +21,9 @@ function Genders(){
     return(
         <div>
             <input type="text" name="todoitem" value={genderName} onChange={genderTodoEntered}/>
-            <button onClick={getGender}>Gender</button>
+            <button onClick={function(){
+        getGender(genderName);
+    }}>Gender</button>
         </div>
     );
 }
