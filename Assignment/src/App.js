@@ -13,6 +13,8 @@ import Student from './Student';
 import Gender from './Genders';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Display from './Display';
+import AddCategory from './AddCategory';
+import ShowCategory from './ShowCategory';
 function App() {
   return (
     <div className="App">
@@ -31,8 +33,15 @@ function App() {
           <Route path="/login/:title/:tokenId" element={<Login/>}/>
         </Routes>
         </BrowserRouter> */}
-        <Gender/>
-        <Display/>
+        {/* <Gender/>
+        <Display/> */}
+        <BrowserRouter>
+    <Routes>
+    <Route path='/' element={<AddCategory/>}> </Route>
+      <Route path="/show" element={<ShowCategory/>}> </Route>
+     {/* <Route path='/categories/:id' element={<CategoryDetails/>}> </Route> */}
+    </Routes>
+    </BrowserRouter>
       </header>
     </div>
   );
