@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function multiple(a, b, c) {
+            return a * b * c;
+        }
+
+        function multiple_curried(a) {
+            return function (b) {
+                return function (c) {
+                    return a * b * c;
+                }
+            }
+        }
+
+        let res = multiple(1, 2, 3);
+        console.log(res);
+
+        let mc1 = multiple_curried(1);
+        let mc2 = mc1(2);
+        let res2 = mc2(3);
+        console.log(res2);
+
+        let res3 = multiple_curried(1)(2)(3);
+        console.log(res3);
+
+        let multiply = (a, b, c) => {
+            return a * b * c;
+            }
+            let multiply_curried = (a) => (b) => (c) => {
+            return a * b * c;
+            }
+            let result = multiply(1, 2, 3);
+            console.log(res);
+            let result2 = multiply_curried(1)(2)(3);
+            console.log(res2);
+
+            let person = { name: 'JC' }
+            function sayName(wishing) {
+                console.log(wishing + ' ' + this.name);
+            }
+            sayName.call(person, 'Hi!')
+
+            let human = { name: 'vamsi' }
+            function sayName(greeting, city) {
+                console.log(greeting + ' ' + this.name + ' from ' + city);
+            }
+            sayName.apply(human, ['Hi!', 'Bangalore']);
+
+            let being = { name: 'JC' }
+            function sayName(greeting, city) {
+                console.log(greeting + ' ' + this.name + ' from ' + city);
+            }
+            let greet = sayName.bind(human);
+            greet('Hi!', 'Bangalore');
+            greet('Hello!', 'Hyderabad');
+
+            var func = function() {
+                console.log(this)
+            }.bind(1);
+            func();
+
+            function checkFun(a, b, c){
+                console.log(this);
+                console.log(a);
+                console.log(b);
+                console.log(c);
+                }
+                checkFun.call(1,[2,3,4]);
+
+                function sumOfNumbers() {
+                    var total = 0;
+                    for(var i = 0; i < arguments.length; i++){
+                        total += arguments[i];
+                    }
+                    return total;
+                }
+                var numbers = [1,2,3]
+                var sum = sumOfNumbers.apply(null,numbers);
+                console.log(sum);
+
+                function updateZipCode() {
+                    console.log(this)
+                }
+                updateZipCode.call(1);
+
+                var updateZipCode = function () {
+                    console.log(this);
+                };
+                updateZipCode.call({ zip: '11787'});
+
+                "use strict";
+                var fellow = {
+                    name : "vamsi",
+                    prop : {
+                        name : "krishna",
+                        getName : function() {
+                            return this.name;
+                        } } }
+                        var name = fellow.prop.getName.bind(fellow);
+                        var name = fellow.prop.getName();
+                        console.log(name);
+
+    </script>
+</body>
+</html>

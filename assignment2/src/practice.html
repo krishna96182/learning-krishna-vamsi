@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       "use strict";
+        let obj2 = {
+            xVal:"",
+            get x() {return this.xVal;},
+        set x(val){
+            console.log("setter ran"+val)
+            this.xVal = val
+        }
+        };
+        obj2.x = 5;
+        console.log(obj2.x);
+    </script>
+    
+</body>
+</html>

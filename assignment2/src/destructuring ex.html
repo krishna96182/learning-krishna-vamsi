@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let greeting, pronoun;
+        [greeting, pronoun] = ["Hi", "I" , "am", "vamsi"];
+        console.log(greeting);
+        console.log(pronoun);
+
+        let [,pronouns,,name] = ["Hi", "I" , "am", "Krishna"];
+        console.log(pronoun);
+        console.log(name);
+
+        let [greet = "hi",names = "vamsi"] = ["hello"];
+        console.log(greet);
+        console.log(names);
+
+        let {persons, country, job} = {name: "Sarah", country: "India", job: "Developer"};
+        console.log(name);
+        console.log(country);
+        console.log(job);
+
+        let person = {nam: "Sarah", countrys: "Nigeria", jobs: "Developer"};
+        let nam, countrys, jobs;
+        ({nam, countrys, jobs} = person);
+        console.log(nam);
+        console.log(jobs);
+
+        let persones = {na: "Sarah", country: "Nigeria", job: "Developer", friend: ["Annie","Becky"]};
+        let {na, friend, ...others} = person;
+        console.log(na);
+        console.log(friend);
+        console.log(others);
+
+        const user = {
+            id: 339,
+            name: 'krishna',
+            age: 21,
+            education: {
+                degree: 'Btech'
+            }
+        };
+        const {education: {degree}} = user;
+        console.log(degree);
+
+        const users = {
+            id: 233,
+            name: 'vamsi',
+            age: 21
+        };
+        const {education: {school: {n = 'vamsi'} = {}} = {}} = user;
+        console.log(n);
+    </script>
+</body>
+</html>
