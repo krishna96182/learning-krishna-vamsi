@@ -1,232 +1,64 @@
-// import logo from './logo.svg';
-// import './App.css';
-// import Menu from './Menu';
-// import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-// import Cities from './Cities';
-// import CityDetails from './CityDetails';
-// import CityNews from './CityNews';
-// import RefHookExample from './RefHookExample';
-// import ClassBasedCounter from './ClassBasedCounter';
-// import { useState } from 'react';
-// import { useParams } from 'react-router-dom';
+console.log("starting express with nodemon")
+var createError = require('http-errors');
+var express = require('express');
+const cors = require("cors");
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+const mongoose = require('mongoose');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var productsRouter = require('./routes/products');
+const authorsRouter = require('./routes/authors');
+const todoRouter = require('./routes/todo');
+const carapiRouter = require('./routes/carapi');
+const booksRouter = require('./routes/books')
+const categoryRouter = require('./routes/category');
+const productsController = require('./routes/Products');
+var app = express();
 
-// const LOGIN_URL = "https://ascendion.com/login";
-// let menuData = [
-//   { title: "Home", path: "/" },
-//   { title: "About", path: "/about" },
-//   { title: "Contact", path: "/contact" },
-// ];
-// let login_attempts = 5;
-// let error_msgs = { error: "sry", error_500: "server error" };
-// function greet() {
-//   alert("hi you are logged in");
-// }
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.use(cors());
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// function App() {
-//   let [show,setShow]=useState(true);
-//   return (
-//     <div className="App">
-//       show var = {show} <br/>
-//       <select onChange={(e)=>{
-//         e.target.value=="show" ? setShow(true) : setShow(false);
-//       }}
-//       >
-//         <option value="show">Show</option>
-//         <option value="hide">Hide</option>
-//       </select>
-//       <BrowserRouter>
-//       {show ? <Menu menuData={menuData}/>:""}
-//         <Routes>
-//           <Route path="classBased" element={<ClassBasedCounter />} />
-//           <Route path="/refHook" element={<RefHookExample />} ></Route>
-//           <Route path="/cities" element={<Cities />} >
-//           <Route path=":name/" element={<CityDetails />} >
-//           <Route path="news" element={<CityNews />} />
-//           </Route>
-//           </Route>
-//         </Routes>
-//       </BrowserRouter>
-//     </div>
-//   );
-// }
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/products', productsRouter);
+app.use('/authors', authorsRouter);
+app.use('/todo', todoRouter);
+app.use('/carapi', carapiRouter);
+app.use('/books', booksRouter);
+app.use('/categories', categoryRouter);
+app.use('/products', productsController)
+let mongoConnUrl = "mongodb://localhost/ascendion";
+mongoose.connect(mongoConnUrl);
+let db = mongoose.connection;
+db.on("error", function() {
+  console.log("Error came");
+});
+db.on("connected", function() {
+  console.log("connected to mongoose")
+});
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
-/*function App(){
-  return (
-    <>
-    <MUIspacing/>
-    <AutoGrid/>
-    <BasicGrid/>
-    <ComplexFluidGrid/>
-    <FeaturedPost/>
-    <MainFeaturedPost/>
-    <NestedGridGroup/>
-    </>
-  )
-}*/
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
-
-// import React, { useState } from 'react';
-// import Login from './Login';
-// import Menu from './Menu';
-
-// const App = () => {
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-//   const handleLogin = () => {
-//     setIsLoggedIn(true);
-//   };
-
-//   const handleLogout = () => {
-//     setIsLoggedIn(false);
-//   };
-
-//   return (
-//     <div className="container">
-//       <Menu isLoggedIn={isLoggedIn} />
-//       <Login onLogin={handleLogin} onLogout={handleLogout} isLoggedIn={isLoggedIn} />
-//     </div>
-//   );
-// };
-
-
-// import './App.css';
-// // import CountReducer from './reducers/CountReducer';
-// // import ReduxCounter from './ReduxCounter/ReduxCounter';
-// // import ReduxTodo from './ReduxCounter/ReduxTodo';
-// import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-// import React from "react";
-// // import EditTodo from './ReduxCounter/EditTodo';
-// // import UseMemoHookExample from './UseMemoHookExample';
-// // import CustomHookUser from './CustomHookUser';
-// // import Profile from './Profile';
-// import Todo from './Todo';
-// import JwtDecode from './JwtDecode';
-// import LazyHome from './LazyHome';
-// import HeaderBar from './HeaderBar';
-// import UseMemoHookExample from './UseMemoHookExample';
-// import Notifications from './NotificationContext';
-// import ReactDOM from "react-dom";
-// // function App() {
-// //     return (
-// //         <BrowserRouter>
-// //             <nav>
-// //                 <Link to='/CountReducers'>Count</Link>
-// //                 <Link to='/ReduxCounter'>Counter</Link>
-// //                 <Link to='/ReduxTodo'>Todo</Link>
-// //             </nav>
-// //             <Routes>
-// //                 <Route path='/CountReducers' element={<CountReducer />} />
-// //                 <Route path='/ReduxCounter' element={<ReduxCounter />} />
-// //                 <Route path='/ReduxTodo' element={<ReduxTodo />}>
-// //                 <Route path='/usememo' element={<UseMemoHookExample />}/>
-// //               </Route
-// //                     path="/edit/:index"
-// //                     element={<EditTodo todos={todos} />}
-// //                 />
-// //                 </Route>
-// //             </Routes>
-// //         </BrowserRouter>
-// //     ); 
-// // }
-
-// // export default App;
-// // const NumberContext = React.createContext();
-// function App() {
-//     return (
-//         <BrowserRouter>
-//             <Routes>
-//                 {/* <Route path="/*" element={<ReduxTodo />} />
-//                 <Route path='/EditTodo' element={<EditTodo />}/>
-//                 <Route path='/usememo' element={<UseMemoHookExample />}/>
-//                 <Route path='/CustomHook' element={<CustomHookUser />}/>
-//                 <Route path='/profile' element={<Profile />}/> */}
-//                 {/* <Route path='/todo' element={<Todo />}/> */}
-//                 {/* <Route path='/jwt' element={<JwtDecode />}/>
-//                 <Route path='/lazy' element={<LazyHome />}/> */}
-//                 {/* <Route path='/bar' element={<HeaderBar />}/> */}
-//                 <Route path='/memo' element={<UseMemoHookExample />}/>
-//                 <Route path='/bar' element={<HeaderBar />}/>
-
-//             </Routes>
-//         </BrowserRouter>
-//     );
-   
-// }
-// export default App;
-
-// src/App.jsx
-// import Task from './components/Task';
-// import TaskList from './components/TaskList';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <Task />
-//       <TaskList />
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-// import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-// import Todo from "./Todo";
-// import TodoDetails from './TodoDetails';
-// import TodoDetailsEdit from './TodoDetailsEdit';
-
-// function App() {
-//   return (
-//       <BrowserRouter>
-//           <Routes>
-//               <Route path="/todos" element={<Todo />} />
-//               <Route path="/todos/:id" element={<TodoDetails />} />
-//               <Route path="/todos/:id/edit" element={<TodoDetailsEdit />} />
-//           </Routes>
-//       </BrowserRouter>
-//   );
-// }
-// export default App;
-
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { AppBar, Toolbar, Button, Container } from '@mui/material';
-import ProductList from './products/ProductList';
-import ProductForm from './products/ProductForm';
-import ProductSearch from './products/ProductSearch';
-import ProductDetails from './products/ProductDetails';
-
-function App() {
-    return (
-        <Router>
-            <AppBar 
-                position="static" 
-                sx={{ backgroundColor: '#2C3E50' }}
-            >
-                <Toolbar sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-                    <Button color="inherit" component={Link} to="/" sx={{ color: '#ECF0F1', mr: 2 }}>
-                        Home
-                    </Button>
-                    <Button color="inherit" component={Link} to="/product/add" sx={{ color: '#ECF0F1', mr: 2 }}>
-                        Add Product
-                    </Button>
-                    <Button color="inherit" component={Link} to="/search" sx={{ color: '#ECF0F1' }}>
-                        Search Products
-                    </Button>
-                </Toolbar>
-            </AppBar>
-            <Container>
-                <Routes>
-                    <Route path="/" element={<ProductList />} />
-                    <Route path="/product/add" element={<ProductForm />} />
-                    <Route path="/product/edit/:id" element={<ProductForm />} />
-                    <Route path="/product/:id" element={<ProductDetails />} />
-                    <Route path="/search" element={<ProductSearch />} />
-                </Routes>
-            </Container>
-        </Router>
-    );
-}
-
-export default App;
+module.exports = app;
